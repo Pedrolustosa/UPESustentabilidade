@@ -49,6 +49,7 @@ APP/upe-mapa/yarn-debug.log*
 APP/upe-mapa/yarn-error.log*
 .pnp
 .pnp.js
+.vercel
 
 # -----------------------------------------------------------------------------
 # Testes e cobertura (geral)
