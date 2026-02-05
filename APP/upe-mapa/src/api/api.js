@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
+  // API local (desenvolvimento)
+  // baseURL: 'http://127.0.0.1:8000',
+  baseURL: 'https://upe-sustentabilidades-api.azurewebsites.net',
   timeout: 30000, // 30 segundos
 });
 
