@@ -1,0 +1,45 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  min-height: 320px;
+}
+
+.empty-state-icon {
+  color: #adb5bd;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-state-text {
+  font-size: 0.9375rem;
+  color: #6c757d;
+  max-width: 400px;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.empty-state-cta {
+  padding: 0.75rem 1.5rem;
+  background: #B71C1C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.empty-state-cta:hover {
+  background: #8B0000;
+}

@@ -10,21 +10,24 @@
 .header-content {
   max-width: 100%;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .logo-container {
-  display: flex;
-  align-items: center;
+  flex-shrink: 0;
 }
 
 .logo-circle {
@@ -45,6 +48,10 @@
   letter-spacing: 0.5px;
 }
 
+.header-title {
+  flex-shrink: 0;
+}
+
 .header-title h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -59,13 +66,104 @@
   font-weight: 400;
 }
 
+.header-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.breadcrumb-item {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.breadcrumb-sep {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.breadcrumb-link {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.2rem 0.35rem;
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+.breadcrumb-link:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.breadcrumb-link.active {
+  font-weight: 600;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .header-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.header-summary {
+  font-size: 0.8125rem;
+  opacity: 0.95;
+  white-space: nowrap;
+}
+
+.header-summary-sep {
+  margin: 0 0.35rem;
+  opacity: 0.7;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-import {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.btn-import:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-import-text {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .btn-import-text {
+    display: inline;
+  }
+}
+
+.header-dropdown {
+  position: relative;
 }
 
 .btn-icon {
+  position: relative;
   background: rgba(255, 255, 255, 0.15);
   border: none;
   color: white;
@@ -84,13 +182,138 @@
   transform: translateY(-1px);
 }
 
+.btn-icon-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: #ffc107;
+  color: #1a1a1a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-dropdown-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  min-width: 280px;
+  max-width: 340px;
+  background: white;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1100;
+  overflow: hidden;
+}
+
+.dropdown-panel-header {
+  padding: 0.75rem 1rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  font-size: 0.875rem;
+}
+
+.dropdown-panel-body {
+  padding: 0.5rem;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.dropdown-empty {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+.notif-item {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+}
+
+.notif-item:last-child {
+  margin-bottom: 0;
+}
+
+.notif-item strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8125rem;
+}
+
+.notif-item p {
+  margin: 0;
+  color: #495057;
+  line-height: 1.4;
+}
+
+.notif-sucesso {
+  background: #d4edda;
+}
+
+.notif-sucesso strong {
+  color: #155724;
+}
+
+.notif-aviso {
+  background: #fff3cd;
+}
+
+.notif-aviso strong {
+  color: #856404;
+}
+
+.notif-info {
+  background: #cce5ff;
+}
+
+.notif-info strong {
+  color: #004085;
+}
+
+.dropdown-menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #333;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-menu-item:hover {
+  background: #f0f0f0;
+}
+
 @media (max-width: 768px) {
   .header-content {
     padding: 0.75rem 1rem;
   }
 
+  .header-breadcrumb {
+    display: none;
+  }
+
+  .header-summary {
+    display: none;
+  }
+
   .header-title h1 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .header-subtitle {

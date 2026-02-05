@@ -1,15 +1,13 @@
 import { useState } from 'react';
+import { getCampus, getOds } from '../utils/projetoFields';
 import './FilterBar.css';
 
-function FilterBar({ projetos, onFilterChange }) {
+function FilterBar({ projetos, onFilterChange, buscaTexto, onBuscaChange }) {
   const [filtroCampus, setFiltroCampus] = useState('');
   const [filtroODS, setFiltroODS] = useState('');
 
-  // Extrai campus únicos
-  const campusUnicos = [...new Set(projetos.map(p => p.campus_padrao).filter(Boolean))].sort();
-  
-  // Extrai ODS únicos
-  const odsUnicos = [...new Set(projetos.map(p => p['1º Ods']).filter(Boolean))].sort();
+  const campusUnicos = [...new Set(projetos.map((p) => getCampus(p)).filter(Boolean))].sort();
+  const odsUnicos = [...new Set(projetos.map((p) => getOds(p)).filter(Boolean))].sort();
 
   const handleCampusChange = (e) => {
     const valor = e.target.value;
@@ -27,10 +25,30 @@ function FilterBar({ projetos, onFilterChange }) {
     setFiltroCampus('');
     setFiltroODS('');
     onFilterChange({ campus: '', ods: '' });
+    if (onBuscaChange) onBuscaChange('');
   };
 
   return (
     <div className="filter-bar">
+      {onBuscaChange && (
+        <div className="filter-group filter-search">
+          <label htmlFor="filtro-busca" className="filter-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Buscar
+          </label>
+          <input
+            id="filtro-busca"
+            type="text"
+            className="filter-input"
+            placeholder="Título, campus, ODS, professor..."
+            value={buscaTexto || ''}
+            onChange={(e) => onBuscaChange(e.target.value)}
+          />
+        </div>
+      )}
       <div className="filter-group">
         <label htmlFor="filtro-campus" className="filter-label">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -45,19 +63,13 @@ function FilterBar({ projetos, onFilterChange }) {
           onChange={handleCampusChange}
         >
           <option value="">Todos os Campi</option>
-          {campusUnicos.map(campus => (
+          {campusUnicos.map((campus) => (
             <option key={campus} value={campus}>{campus}</option>
           ))}
         </select>
       </div>
-
       <div className="filter-group">
         <label htmlFor="filtro-ods" className="filter-label">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-          </svg>
           ODS
         </label>
         <select
@@ -67,19 +79,18 @@ function FilterBar({ projetos, onFilterChange }) {
           onChange={handleODSChange}
         >
           <option value="">Todos os ODS</option>
-          {odsUnicos.map(ods => (
+          {odsUnicos.map((ods) => (
             <option key={ods} value={ods}>{ods}</option>
           ))}
         </select>
       </div>
-
-      {(filtroCampus || filtroODS) && (
-        <button className="btn-limpar-filtros" onClick={limparFiltros}>
+      {(filtroCampus || filtroODS || (buscaTexto && buscaTexto.trim())) && (
+        <button type="button" className="btn-limpar-filtros" onClick={limparFiltros}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
-          Limpar Filtros
+          Limpar
         </button>
       )}
     </div>

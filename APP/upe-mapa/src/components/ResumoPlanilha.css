@@ -1,0 +1,86 @@
+.resumo-planilha {
+  margin-bottom: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.resumo-planilha-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: none;
+  background: #f8f9fa;
+  color: #333;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.resumo-planilha-trigger:hover {
+  background: #e9ecef;
+}
+
+.resumo-planilha-trigger svg:first-of-type {
+  flex-shrink: 0;
+  color: #0277BD;
+}
+
+.resumo-chevron {
+  margin-left: auto;
+  transition: transform 0.2s;
+}
+
+.resumo-chevron.aberto {
+  transform: rotate(180deg);
+}
+
+.resumo-planilha-conteudo {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #e9ecef;
+  background: #fff;
+}
+
+.resumo-bloco {
+  margin-bottom: 1rem;
+}
+
+.resumo-bloco:last-child {
+  margin-bottom: 0;
+}
+
+.resumo-bloco h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #B71C1C;
+}
+
+.resumo-bloco p,
+.resumo-bloco ul {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: #495057;
+}
+
+.resumo-bloco ul {
+  padding-left: 1.25rem;
+}
+
+.resumo-bloco li {
+  margin-bottom: 0.35rem;
+}
+
+.resumo-bloco li:last-child {
+  margin-bottom: 0;
+}
+
+.resumo-bloco strong {
+  color: #212529;
+}

@@ -1,0 +1,82 @@
+.grafico-barras {
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.grafico-titulo {
+  margin: 0 0 1rem 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.grafico-vazio {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6c757d;
+  flex: 1;
+}
+
+.grafico-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.grafico-linha {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.grafico-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #495057;
+}
+
+.grafico-barra-wrap {
+  height: 20px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.grafico-barra {
+  height: 100%;
+  background: linear-gradient(90deg, #B71C1C 0%, #d32f2f 100%);
+  border-radius: 4px;
+  min-width: 2px;
+  transition: width 0.3s ease;
+}
+
+.grafico-valor {
+  text-align: right;
+  font-weight: 600;
+  color: #333;
+}
+
+@media (max-width: 500px) {
+  .grafico-linha {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+  }
+
+  .grafico-label {
+    grid-column: 1 / -1;
+  }
+
+  .grafico-valor {
+    text-align: left;
+  }
+}

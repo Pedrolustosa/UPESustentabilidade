@@ -1,0 +1,51 @@
+.dashboard-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #856404;
+}
+
+.dashboard-banner-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.dashboard-banner-text {
+  flex: 1;
+}
+
+.dashboard-banner-text strong {
+  color: #533f03;
+}
+
+.dashboard-banner-btn {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dashboard-banner-btn:hover {
+  background: #e0a800;
+}
+
+@media (max-width: 600px) {
+  .dashboard-banner {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-banner-btn {
+    width: 100%;
+  }
+}

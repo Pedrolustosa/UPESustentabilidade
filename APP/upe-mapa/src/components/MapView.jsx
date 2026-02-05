@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import CampusMarker from './CampusMarker';
 import Drawer from './Drawer';
+import { getCampus, getOds } from '../utils/projetoFields';
 import { CAMPUS_COORDENADAS } from '../utils/campusCoordenadas';
 
 // Componente para ajustar o zoom do mapa baseado nos campus
@@ -32,53 +33,38 @@ function MapView({ projetos = [], filtros = {} }) {
   const [drawerCampus, setDrawerCampus] = useState('');
   const [drawerProjetos, setDrawerProjetos] = useState([]);
 
-  // Filtra projetos com coordenadas válidas e aplica filtros
   const projetosComCoordenadas = useMemo(() => {
-    return projetos.filter(
-      (p) => {
-        const lat = p.latitude;
-        const lng = p.longitude;
-        
-        // Valida coordenadas
-        const temCoordenadas = (
-          lat != null &&
-          lng != null &&
-          lat !== '' &&
-          lng !== '' &&
-          lat !== 'None' &&
-          lng !== 'None' &&
-          typeof lat === 'number' &&
-          typeof lng === 'number' &&
-          !isNaN(lat) &&
-          !isNaN(lng) &&
-          p.campus_padrao
-        );
-
-        if (!temCoordenadas) return false;
-
-        // Aplica filtros
-        if (filtros.campus && p.campus_padrao !== filtros.campus) return false;
-        if (filtros.ods && p['1º Ods'] !== filtros.ods) return false;
-
-        return true;
-      }
-    );
+    return projetos.filter((p) => {
+      const lat = p.latitude;
+      const lng = p.longitude;
+      const temCoordenadas =
+        lat != null &&
+        lng != null &&
+        lat !== '' &&
+        lng !== '' &&
+        lat !== 'None' &&
+        lng !== 'None' &&
+        typeof lat === 'number' &&
+        typeof lng === 'number' &&
+        !isNaN(lat) &&
+        !isNaN(lng) &&
+        getCampus(p);
+      if (!temCoordenadas) return false;
+      if (filtros.campus && getCampus(p) !== filtros.campus) return false;
+      if (filtros.ods && getOds(p) !== filtros.ods) return false;
+      return true;
+    });
   }, [projetos, filtros]);
 
-  // Agrupa projetos por campus
   const projetosPorCampus = useMemo(() => {
     const grupos = {};
-    
     projetosComCoordenadas.forEach((projeto) => {
-      const campus = projeto.campus_padrao;
+      const campus = getCampus(projeto);
       if (campus && CAMPUS_COORDENADAS[campus]) {
-        if (!grupos[campus]) {
-          grupos[campus] = [];
-        }
+        if (!grupos[campus]) grupos[campus] = [];
         grupos[campus].push(projeto);
       }
     });
-
     return grupos;
   }, [projetosComCoordenadas]);
 
@@ -123,7 +109,7 @@ function MapView({ projetos = [], filtros = {} }) {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         <MapBounds projetosPorCampus={projetosPorCampus} />
